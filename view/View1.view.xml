@@ -1,0 +1,25 @@
+<mvc:View controllerName="FieldMobility.controller.View1" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:vk="sap.ui.vk" xmlns:vbm="sap.ui.vbm">
+	<App id="idAppControl">
+		<pages>
+			<Page title="Your Quick Start application is ready!">
+				<content>
+					<!-- <core:HTML content="&lt;div id='esri-map-div' height='800px' &gt;"> -->
+					<core:HTML content="&lt;div id=&quot;mapContainer&quot;&gt; &lt;/div&gt;">
+					</core:HTML>
+
+					<!-- <vk:MapContainer autoAdjustHeight="true">
+						<vk:content>
+							<vk:ContainerContent title="Analytic Map"
+								icon="sap-icon://geographic-bubble-chart">
+								<vk:content>
+									<vbm:GeoMap id="vbi2"/>
+								</vk:content>
+							</vk:ContainerContent>
+						</vk:content>
+					</vk:MapContainer> -->
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

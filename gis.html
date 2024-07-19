@@ -1,0 +1,27 @@
+<html>
+
+<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.30/"></script>
+
+<script>
+  require(["esri/config", "esri/Map", "esri/views/MapView"], function(esriConfig, Map, MapView) {
+    esriConfig.apiKey = "AAPK0844337409204e97adf6606573bb4065LG2XsG7ErJOEo7kuicBPdesFgnbH7g7eDTxIwQQ_sxv2AJeklp_TEoJl4Uzf3BLL";
+
+        const map = new Map({
+          basemap: "arcgis/topographic" // basemap styles service
+        });
+        const view = new MapView({
+          map: map,
+          center: [-118.805, 34.027], // Longitude, latitude
+          zoom: 13, // Zoom level
+          container: "viewDiv" // Div element
+        });
+  });
+</script>
+<body>
+    <div id="viewDiv" style="height: 800px;">
+
+    </div>
+
+</body>
+</html>
