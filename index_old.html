@@ -1,18 +1,44 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>Quickstart Tutorial</title>
-	<script id="sap-ui-bootstrap"
-		src="resources/sap-ui-core.js"
-		data-sap-ui-libs="sap.m"
-		data-sap-ui-compat-version="edge"
-		data-sap-ui-async="true"
-		data-sap-ui-on-init="module:ui5/quickstart/index"
-		data-sap-ui-resource-roots='{
-			"ui5.quickstart": "./"
-		}'>
-	</script>
-</head>
-<body class="sapUiBody" id="content"></body>
+
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta charset="UTF-8">
+
+		<title>FieldMobility</title>
+		<style>
+			#mapContainer {
+              position: absolute;
+              height: 100%;
+              width: 100%;
+            }
+		</style>
+		<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+		<!-- src="../resources/sap-ui-core.js" -->
+		<script id="sap-ui-bootstrap"
+			
+			src="https://sapui5.hana.ondemand.com/1.120.18/resources/sap-ui-core.js"
+			data-sap-ui-libs="sap.m"
+			data-sap-ui-theme="sap_horizon"
+			data-sap-ui-compatVersion="edge"
+			data-sap-ui-resourceroots='{"FieldMobility": ""}'>
+		</script>
+
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+
+		<script>
+			sap.ui.getCore().attachInit(function() {
+				new sap.m.Shell({
+					app: new sap.ui.core.ComponentContainer({
+						height : "100%",
+						name : "FieldMobility"
+					})
+				}).placeAt("content");
+			});
+		</script>
+	</head>
+
+	<body class="sapUiBody" id="content">
+	</body>
+
 </html>

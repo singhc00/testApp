@@ -1,0 +1,16 @@
+.orderPopupVBox {
+    width: 100% !important;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding: 20px !important;
+}
+
+.containerVBox {
+    width: 100% !important;
+}
+
+.jobType {
+    font-weight: bold;
+}

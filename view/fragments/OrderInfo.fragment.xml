@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+    <VBox class="orderPopupVBox" alignItems="Center" justifyContent="Center" width="100%">
+        <VBox width="100%" alignItems="Center" justifyContent="Center" alignContent="Center">
+            <Text text="Job type: Repair" class="jobType" />
+            <Button text="New" icon="sap-icon://create" class="sapUiMediumMarginTop"></Button>
+
+            <HBox class="sapUiSmallMarginTop sapUiLargeMarginBottom">
+                <Button text="Travel"></Button>
+                <Button text="Rejected" class="sapUiTinyMarginBegin"></Button>
+                <Button text="Pending Closeout" class="sapUiTinyMarginBegin"></Button>
+            </HBox>
+        </VBox>
+        
+    </VBox>
+</core:FragmentDefinition>
