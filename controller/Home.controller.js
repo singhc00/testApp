@@ -207,7 +207,7 @@ sap.ui.define([
 		nativeScriptOpenBottomSheet() {
 			window.nsWebViewInterface.emit('showBottomSheet', {
 				url: '',
-				hash: 'orderDetails'
+				hash: 'jobDetails'
 			});
 		},
 		bottomPopupAfterRendering() {
