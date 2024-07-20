@@ -1,3 +1,19 @@
 .jobType {
     font-weight: bold;
 }
+
+.sapMPageEnableScrolling {
+    background-color: #fff !important;
+}
+
+.sapUiBody {
+    background-color: #fff !important;
+}
+
+.sapMShellGlobalOuterBackground {
+    background-color: #fff !important;
+}
+
+.sapMShellGlobalInnerBackground {
+    background-color: #fff !important;
+}
