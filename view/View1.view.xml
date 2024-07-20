@@ -2,7 +2,7 @@
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:vk="sap.ui.vk" xmlns:vbm="sap.ui.vbm">
 	<App id="idAppControl">
 		<pages>
-			<Page title="Your Quick Start application is ready!" busy="{viewModel>/pageBusy}" busyIndicatorDelay="0">
+			<Page showHeader="false" busy="{viewModel>/pageBusy}" busyIndicatorDelay="0">
 				<content>
 					<!-- <core:HTML content="&lt;div id='esri-map-div' height='800px' &gt;"> -->
 					<core:HTML content="&lt;div id=&quot;mapContainer&quot;&gt; &lt;/div&gt;">

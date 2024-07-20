@@ -183,6 +183,10 @@ sap.ui.define([
 
 		},
 		openOrderPopup(content) {
+			if(window.nsWebViewInterface) {
+				this.nativeScriptOpenBottomSheet();
+				return;
+			}
 			const originalOnAfterRendering = content.onAfterRendering;
 			const controller = this;
 			content.onAfterRendering = function () {
@@ -194,6 +198,14 @@ sap.ui.define([
 
 			const popup = new Popup(content, false, false, false);
 			popup.open(0, sap.ui.core.Popup.Dock.CenterBottom, sap.ui.core.Popup.Dock.CenterBottom, document);
+		},
+		/**
+		 * Opens nativescript bottom sheet
+		 */
+		nativeScriptOpenBottomSheet() {
+			window.nsWebViewInterface.emit('showBottomSheet', {
+				url: 'https://www.google.com'
+			});
 		},
 		bottomPopupAfterRendering() {
 			debugger;
