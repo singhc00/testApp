@@ -176,7 +176,7 @@ sap.ui.define([
 			viewModel.setProperty("/pageBusy", true);
 			const orderInfoPopupContent = await sap.ui.core.Fragment.load({
 				type: "XML",
-				name: "FieldMobility.view.fragments.OrderInfo",
+				name: "FieldMobility.view.fragments.OrderInfoWeb",
 				controller: this
 			});
 

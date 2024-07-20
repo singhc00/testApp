@@ -17,3 +17,10 @@
 .sapMShellGlobalInnerBackground {
     background-color: #fff !important;
 }
+
+.web-bottom-sheet {
+    background-color: #fff;
+    width: 100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}

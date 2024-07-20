@@ -4,11 +4,36 @@
             <Text text="Job type: Repair" class="jobType" />
             <Button text="New" icon="sap-icon://create" class="sapUiMediumMarginTop"></Button>
 
-            <HBox class="sapUiSmallMarginTop sapUiLargeMarginBottom">
+            <HBox class="sapUiTinyMarginTop sapUiMediumMarginBottom">
                 <Button text="Travel"></Button>
                 <Button text="Rejected" class="sapUiTinyMarginBegin"></Button>
                 <Button text="Pending Closeout" class="sapUiTinyMarginBegin"></Button>
             </HBox>
+
+            <VBox alignItems="Center" justifyContent="Center" class="sapUiMediumMarginTop">
+                <FormattedText htmlText="&lt;em&gt;[Work Order Details from SAP/CLICK]&lt;/&gt;"
+                    ></FormattedText>
+                <Select>
+                    <items>
+                        <core:Item key="WorkOrderDetails" text="Work Order Details "/>
+                    </items>
+                </Select>
+            </VBox>
+            
+            <VBox alignItems="Center" justifyContent="Center" class="sapUiMediumMarginTop">
+                <FormattedText htmlText="&lt;em&gt;[Asset Details from SAP + GIS Based on WO/NOTI FLOC]&lt;/&gt;"></FormattedText>
+                <Select>
+                    <items>
+                        <core:Item key="AssetDetails" text="Asset Details"/>
+                    </items>
+                </Select>
+            </VBox>
+
+            <VBox class="data-update-form">
+
+            
+            </VBox>
+
         </VBox>
         
     </VBox>
