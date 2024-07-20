@@ -1,5 +1,5 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+	"FieldMobility/controller/BaseController",
 	"FieldMobility/util/ArcGis",
 	"sap/ui/core/Popup",
 	"sap/m/Button",
@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Controller, ArcGis, Popup, Button, VBox, Fragment, JSONModel) {
 	"use strict";
 
-	return Controller.extend("FieldMobility.controller.View1", {
+	return Controller.extend("FieldMobility.controller.Home", {
 		initializeMap(baseMapName, mapDivId, centerPoint, zoomLevel) {
 			const controller = this;
 			ArcGis.require(["esri/config",

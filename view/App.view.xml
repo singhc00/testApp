@@ -1,0 +1,6 @@
+<mvc:View controllerName="FieldMobility.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:vk="sap.ui.vk" xmlns:vbm="sap.ui.vbm">
+	<App id="idAppControl">
+		
+	</App>
+</mvc:View>

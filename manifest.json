@@ -48,7 +48,7 @@
 	"sap.ui5": {
 		"_version": "1.1.0",
 		"rootView": {
-			"viewName": "FieldMobility.view.View1",
+			"viewName": "FieldMobility.view.App",
 			"type": "XML"
 		},
 		"dependencies": {
@@ -88,12 +88,34 @@
 				"controlAggregation": "pages",
 				"controlId": "idAppControl"
 			},
+			"routes": [
+				{
+					"name": "Home",
+					"pattern": "/:?query:",
+					"target": [
+						"Home"
+					]
+				},
+				{
+					"name": "JobDetails",
+					"pattern": "jobDetails",
+					"target": [
+						"JobDetails"
+					]
+				}
+			],
 			"targets": {
-				"TargetView1": {
+				"Home": {
 					"viewType": "XML",
 					"transition": "slide",
 					"clearAggregation": true,
-					"viewName": "View1"
+					"viewName": "Home"
+				}, 
+				"JobDetails": {
+					"viewType": "XML",
+					"transition": "slide",
+					"clearAggregation": true,
+					"viewName": "JobDetails"
 				}
 			}
 		}
