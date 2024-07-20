@@ -206,7 +206,8 @@ sap.ui.define([
 		 */
 		nativeScriptOpenBottomSheet() {
 			window.nsWebViewInterface.emit('showBottomSheet', {
-				url: 'https://www.google.com'
+				url: '',
+				hash: 'orderDetails'
 			});
 		},
 		bottomPopupAfterRendering() {
