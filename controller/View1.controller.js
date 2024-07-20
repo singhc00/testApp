@@ -162,6 +162,11 @@ sap.ui.define([
 		 */
 		async openActionSheet(attributes) {
 			const viewModel = this.getView().getModel("viewModel");
+			
+			if(window.nsWebViewInterface) {
+				this.nativeScriptOpenBottomSheet();
+				return;
+			}
 
 			if (this.orderInfoPopupContent) {
 				this.openOrderPopup(this.orderInfoPopupContent);
@@ -183,10 +188,7 @@ sap.ui.define([
 
 		},
 		openOrderPopup(content) {
-			if(window.nsWebViewInterface) {
-				this.nativeScriptOpenBottomSheet();
-				return;
-			}
+			
 			const originalOnAfterRendering = content.onAfterRendering;
 			const controller = this;
 			content.onAfterRendering = function () {
