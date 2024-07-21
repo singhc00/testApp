@@ -6,14 +6,14 @@
             <Button text="New" icon="sap-icon://create" class="sapUiMediumMarginTop" width="5rem"></Button>
 
             <HBox class="sapUiTinyMarginTop sapUiMediumMarginBottom">
-                <Button text="Travel" width="10rem"></Button>
-                <Button text="Rejected" class="sapUiTinyMarginBegin" width="10rem"></Button>
-                <Button text="Pending Closeout" class="sapUiTinyMarginBegin" width="10rem"></Button>
+                <Button text="Travel" width="8rem"></Button>
+                <Button text="Rejected" class="sapUiTinyMarginBegin" width="8rem"></Button>
+                <Button text="Pending Closeout" class="sapUiTinyMarginBegin" width="8.2rem"></Button>
             </HBox>
 
             <VBox alignItems="Center" justifyContent="Center" class="sapUiMediumMarginTop">
                 <FormattedText htmlText="&lt;em&gt;[Work Order Details from SAP/CLICK]&lt;/em&gt;"
-                    width="30rem" class="text-align-center"></FormattedText>
+                    width="20rem" class="text-align-center"></FormattedText>
                 <Select class="sapUiTinyMarginTop"> 
                     <items>
                         <core:Item key="WorkOrderDetails" text="Work Order Details "/>
@@ -23,7 +23,7 @@
             
             <VBox alignItems="Center" justifyContent="Center" class="sapUiMediumMarginTop">
                 <FormattedText htmlText="&lt;em&gt;[Asset Details from SAP + GIS Based on WO/NOTI FLOC]&lt;/em&gt;"
-                    width="30rem" class="text-align-center"></FormattedText>
+                    width="20rem" class="text-align-center"></FormattedText>
                 <Select class="sapUiTinyMarginTop">
                     <items>
                         <core:Item key="AssetDetails" text="Asset Details"/>
@@ -33,7 +33,7 @@
 
             <VBox class="data-update-form sapUiMediumMarginTop sapUiMediumMarginBegin sapUiMediumMarginEnd sapUiMediumMarginBottom">
                 <FormattedText htmlText="&lt;em&gt;[Data Update Form]&lt;/em&gt;"
-                    width="30rem" class="text-align-center" ></FormattedText>
+                    width="20rem" class="text-align-center" ></FormattedText>
 
                 <Label text="Text field" class="sapUiSmallMarginTop"/>
                 <Input placeholder="Placeholder text"></Input>
