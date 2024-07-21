@@ -51,8 +51,8 @@ sap.ui.define([
 						}
 					});
 					this.mapView.ui.add(locate, "top-left");
-
 					controller.addPoints(GraphicsLayer, Graphic);
+
 
 				});
 		},
@@ -160,12 +160,14 @@ sap.ui.define([
 			}
 			
 		},
+
 		/**
 		 * Add point to the map
 		 * @param {*} GraphicsLayer 
 		 * @param {*} Graphic 
 		 */
 		addPoint(GraphicsLayer, Graphic, point) {
+
 			const graphicsLayer = new GraphicsLayer();
 			graphicsLayer.on("click", () => {
 				console.log('Point Clicked');
