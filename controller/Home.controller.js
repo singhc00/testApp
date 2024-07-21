@@ -70,7 +70,8 @@ sap.ui.define([
 
 			let viewModel = this.getView().getModel("viewModel");
 			viewModel.setData({
-				pageBusy: false
+				pageBusy: false,
+				submitVisible: window.nsWebViewInterface ? true : false
 			});
 		},
 		/**
@@ -167,7 +168,8 @@ sap.ui.define([
 				this.nativeScriptOpenBottomSheet();
 				return;
 			}
-
+			this.openOrderDialog();
+			return;
 			if (this.orderInfoPopupContent) {
 				this.openOrderPopup(this.orderInfoPopupContent);
 				return;
@@ -186,6 +188,19 @@ sap.ui.define([
 			this.openOrderPopup(this.orderInfoPopupContent);
 
 
+		},
+		async openOrderDialog() {
+			if(!this.jobDetailsDialog) {
+				const jobDetailsDialog = await sap.ui.core.Fragment.load({
+					type: "XML",
+					name: "FieldMobility.view.fragments.JobDetailsDialog",
+					controller: this
+				});
+				this.jobDetailsDialog = jobDetailsDialog;
+				this.getView().addDependent(this.jobDetailsDialog);
+			}
+
+			this.jobDetailsDialog.open();
 		},
 		openOrderPopup(content) {
 			

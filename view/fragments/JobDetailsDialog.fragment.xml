@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+
+<Dialog class="sapUiContentPadding" title="Job Details"
+    >
+    <core:Fragment fragmentName="FieldMobility.view.fragments.OrderInfo"
+						type="XML" />
+    <beginButton>
+        <Button type="Emphasized" text="Submit" ></Button>
+    </beginButton>
+
+    <endButton>
+        <Button text="Cancel"></Button>
+    </endButton>
+</Dialog>
+</core:FragmentDefinition>

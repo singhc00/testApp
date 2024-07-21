@@ -24,3 +24,13 @@
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
 }
+
+.text-align-center {
+    text-align: center;
+}
+
+.data-update-form {
+    padding: 40px;;
+    background-color: #f8f8f8;
+    border-radius: 30px;
+}

@@ -1,19 +1,20 @@
-<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+<core:FragmentDefinition xmlns:tnt="sap.tnt" xmlns:core="sap.ui.core" xmlns="sap.m"
+    xmlns:u="sap.ui.unified">
     <VBox alignItems="Center" justifyContent="Center" width="100%">
         <VBox width="100%" class="sapUiMediumMarginTop" alignItems="Center" justifyContent="Center" alignContent="Center">
             <Text text="Job type: Repair" class="jobType" />
-            <Button text="New" icon="sap-icon://create" class="sapUiMediumMarginTop"></Button>
+            <Button text="New" icon="sap-icon://create" class="sapUiMediumMarginTop" width="5rem"></Button>
 
             <HBox class="sapUiTinyMarginTop sapUiMediumMarginBottom">
-                <Button text="Travel"></Button>
-                <Button text="Rejected" class="sapUiTinyMarginBegin"></Button>
-                <Button text="Pending Closeout" class="sapUiTinyMarginBegin"></Button>
+                <Button text="Travel" width="10rem"></Button>
+                <Button text="Rejected" class="sapUiTinyMarginBegin" width="10rem"></Button>
+                <Button text="Pending Closeout" class="sapUiTinyMarginBegin" width="10rem"></Button>
             </HBox>
 
             <VBox alignItems="Center" justifyContent="Center" class="sapUiMediumMarginTop">
-                <FormattedText htmlText="&lt;em&gt;[Work Order Details from SAP/CLICK]&lt;/&gt;"
-                    ></FormattedText>
-                <Select>
+                <FormattedText htmlText="&lt;em&gt;[Work Order Details from SAP/CLICK]&lt;/em&gt;"
+                    width="30rem" class="text-align-center"></FormattedText>
+                <Select class="sapUiTinyMarginTop"> 
                     <items>
                         <core:Item key="WorkOrderDetails" text="Work Order Details "/>
                     </items>
@@ -21,17 +22,67 @@
             </VBox>
             
             <VBox alignItems="Center" justifyContent="Center" class="sapUiMediumMarginTop">
-                <FormattedText htmlText="&lt;em&gt;[Asset Details from SAP + GIS Based on WO/NOTI FLOC]&lt;/&gt;"></FormattedText>
-                <Select>
+                <FormattedText htmlText="&lt;em&gt;[Asset Details from SAP + GIS Based on WO/NOTI FLOC]&lt;/em&gt;"
+                    width="30rem" class="text-align-center"></FormattedText>
+                <Select class="sapUiTinyMarginTop">
                     <items>
                         <core:Item key="AssetDetails" text="Asset Details"/>
                     </items>
                 </Select>
             </VBox>
 
-            <VBox class="data-update-form">
+            <VBox class="data-update-form sapUiMediumMarginTop sapUiMediumMarginBegin sapUiMediumMarginEnd sapUiMediumMarginBottom">
+                <FormattedText htmlText="&lt;em&gt;[Data Update Form]&lt;/em&gt;"
+                    width="30rem" class="text-align-center" ></FormattedText>
 
-            
+                <Label text="Text field" class="sapUiSmallMarginTop"/>
+                <Input placeholder="Placeholder text"></Input>
+
+                <Label text="Text field" class="sapUiSmallMarginTop"/>
+                <Input placeholder="Placeholder text"></Input>
+
+                <Label text="Text field" class="sapUiSmallMarginTop"/>
+                <Input placeholder="Placeholder text"></Input>
+
+                <Label text="Text field" class="sapUiSmallMarginTop"/>
+                <Input placeholder="Placeholder text"></Input>
+
+                <VBox class="sapUiSmallMarginTop">
+                    <Text text="Radio Group Title"></Text>
+                    <Label text="Description"></Label>
+                    <RadioButtonGroup >
+                        <RadioButton text="Radio Button"></RadioButton>
+                        <RadioButton text="Radio Button"></RadioButton>
+                        <RadioButton text="Radio Button"></RadioButton>
+                    </RadioButtonGroup>
+                </VBox>
+                
+                <VBox class="sapUiSmallMarginTop">
+                    <Text text="Checkbox Group Title"></Text>
+                    <Label text="Description"></Label>
+                    <CheckBox text="Checkbox"></CheckBox>
+                    <CheckBox text="Checkbox"></CheckBox>
+                </VBox>
+
+                <HBox class="sapUiSmallMarginTop">
+                    <Switch ></Switch>
+                    <Text text="Toggle Item">
+                    <layoutData>
+                        <FlexItemData alignSelf="Center"></FlexItemData>
+                    </layoutData>
+                    </Text>
+                    
+                </HBox>
+
+                <u:FileUploader class="sapUiSmallMarginTop"></u:FileUploader>
+                
+                <Button text="Submit" type="Emphasized" class="sapUiSmallMarginTop"
+                    visible="{viewModel>/submitVisible}"></Button>
+
+                
+                
+
+
             </VBox>
 
         </VBox>
