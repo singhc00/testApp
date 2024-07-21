@@ -33,7 +33,7 @@
 
             <VBox class="data-update-form sapUiMediumMarginTop sapUiMediumMarginBegin sapUiMediumMarginEnd sapUiMediumMarginBottom">
                 <FormattedText htmlText="&lt;em&gt;[Data Update Form]&lt;/em&gt;"
-                    width="20rem" class="text-align-center" ></FormattedText>
+                    class="text-align-center" ></FormattedText>
 
                 <Label text="Text field" class="sapUiSmallMarginTop"/>
                 <Input placeholder="Placeholder text"></Input>

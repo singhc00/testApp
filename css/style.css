@@ -33,4 +33,5 @@
     padding: 40px;;
     background-color: #f8f8f8;
     border-radius: 20px;
+    min-width: 100%;
 }
