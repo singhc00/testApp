@@ -6,9 +6,9 @@
             <Button text="New" icon="sap-icon://create" class="sapUiMediumMarginTop" width="5rem"></Button>
 
             <HBox class="sapUiTinyMarginTop sapUiMediumMarginBottom">
-                <Button text="Travel" width="8rem"></Button>
-                <Button text="Rejected" class="sapUiTinyMarginBegin" width="8rem"></Button>
-                <Button text="Pending Closeout" class="sapUiTinyMarginBegin" width="8.2rem"></Button>
+                <Button text="Travel" ></Button>
+                <Button text="Rejected" class="sapUiTinyMarginBegin"></Button>
+                <Button text="Pending Closeout" class="sapUiTinyMarginBegin" ></Button>
             </HBox>
 
             <VBox alignItems="Center" justifyContent="Center" class="sapUiMediumMarginTop">
