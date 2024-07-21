@@ -20,8 +20,9 @@ sap.ui.define([
 				"esri/layers/GraphicsLayer",
 				"esri/geometry/SpatialReference",
 				"esri/geometry/Polygon",
+				 "esri/layers/FeatureLayer"
 			],
-				(esriConfig, Map, MapView, Locate, Graphic, GraphicsLayer, SpatialReference, Polygon) => {
+				(esriConfig, Map, MapView, Locate, Graphic, GraphicsLayer, SpatialReference, Polygon, FeatureLayer) => {
 					esriConfig.apiKey = "AAPK0844337409204e97adf6606573bb4065LG2XsG7ErJOEo7kuicBPdesFgnbH7g7eDTxIwQQ_sxv2AJeklp_TEoJl4Uzf3BLL";
 
 					const map = new Map({
@@ -38,6 +39,8 @@ sap.ui.define([
 					this.mapView.on('click', (event) => {
 						this.mapViewClicked(event);
 					});
+					
+					controller.addFeatureLayer(FeatureLayer);
 
 					const locate = new Locate({
 						view: this.mapView,
@@ -50,6 +53,7 @@ sap.ui.define([
 					this.mapView.ui.add(locate, "top-left");
 
 					controller.addPoint(GraphicsLayer, Graphic);
+
 				});
 		},
 
@@ -124,6 +128,11 @@ sap.ui.define([
 				});
 
 		},
+		/**
+		 * Add point to the map
+		 * @param {*} GraphicsLayer 
+		 * @param {*} Graphic 
+		 */
 		addPoint(GraphicsLayer, Graphic) {
 			const graphicsLayer = new GraphicsLayer();
 			graphicsLayer.on("click", () => {
@@ -139,7 +148,7 @@ sap.ui.define([
 			};
 
 			//[138.608640, -35.042099]
-			const simpleMarkerSymbol = {
+			let simpleMarkerSymbol = {
 				type: "simple-marker",
 				color: [226, 119, 40],  // Orange
 				outline: {
@@ -147,6 +156,14 @@ sap.ui.define([
 					width: 1
 				}
 			};
+			  simpleMarkerSymbol = {
+				type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
+				url: './images/marker.png',
+				width: "50px",
+				height: "50px"
+			  };
+			  
+			  
 
 			const pointGraphic = new Graphic({
 				geometry: point,
@@ -157,6 +174,17 @@ sap.ui.define([
 				}
 			});
 			graphicsLayer.add(pointGraphic);
+		},
+		/**
+		 * Adds a feature layer
+		 */
+		addFeatureLayer(FeatureLayer) {
+			//Trailheads feature layer (points)
+			const trailsLayer = new FeatureLayer({
+				url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails/FeatureServer/0"
+			  });
+
+			this.map.add(trailsLayer, 0);
 		},
 		/**
 		 * Method opens an action sheet for the object type
