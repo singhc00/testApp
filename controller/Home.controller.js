@@ -118,7 +118,7 @@ sap.ui.define([
 			oGeoMap.setRefMapLayerStack("DEFAULT");
 		},
 		onAfterRendering() {
-			this.initializeMap('gray', 'mapContainer', [138.608640, -35.042099], 15);
+			this.initializeMap("arcgis/topographic", 'mapContainer', [138.608640, -35.042099], 15);
 			//this.initializeMap('streets', 'mapContainer', [-118.818984489994, 34.0137559967283], 15);
 			//[-118.818984489994, 34.0137559967283]
 		},

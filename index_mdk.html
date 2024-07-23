@@ -13,7 +13,7 @@
               width: 100%;
             }
 		</style>
-		<link rel="stylesheet" href="https://js.arcgis.com/4.6/esri/themes/light/main.css">
+		<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
 		<script src="nativescript-webview-interface.js"></script>
 		<!-- src="../resources/sap-ui-core.js" -->
 		<script id="sap-ui-bootstrap"
@@ -33,7 +33,8 @@
 					app: new sap.ui.core.ComponentContainer({
 						height : "100%",
 						name : "FieldMobility"
-					})
+					}),
+					appWidthLimited: false
 				}).placeAt("content");
 			});
 		</script>
