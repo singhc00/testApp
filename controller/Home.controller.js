@@ -20,9 +20,10 @@ sap.ui.define([
 				"esri/layers/GraphicsLayer",
 				"esri/geometry/SpatialReference",
 				"esri/geometry/Polygon",
-				 "esri/layers/FeatureLayer"
+				 "esri/layers/FeatureLayer",
+				 "esri/widgets/Search"
 			],
-				(esriConfig, Map, MapView, Locate, Graphic, GraphicsLayer, SpatialReference, Polygon, FeatureLayer) => {
+				(esriConfig, Map, MapView, Locate, Graphic, GraphicsLayer, SpatialReference, Polygon, FeatureLayer, Search) => {
 					esriConfig.apiKey = "AAPK0844337409204e97adf6606573bb4065LG2XsG7ErJOEo7kuicBPdesFgnbH7g7eDTxIwQQ_sxv2AJeklp_TEoJl4Uzf3BLL";
 
 					const map = new Map({
@@ -52,6 +53,7 @@ sap.ui.define([
 					});
 					this.mapView.ui.add(locate, "top-left");
 					controller.addPoints(GraphicsLayer, Graphic);
+					controller.Search = Search;
 
 
 				});
@@ -122,11 +124,17 @@ sap.ui.define([
 				.then((response) => {
 					console.log(response);
 					if (response.results && response.results.length > 0) {
+						this.setPointSelected(response.results[0].graphic);
 						this.openActionSheet();
 
 					}
 				});
 
+		},
+		async setPointSelected(graphic) {
+			graphic.symbol.url = "./images/marker-black.png";
+			debugger;
+			
 		},
 		addPoints(GraphicsLayer, Graphic) {
 			const points = [
@@ -134,23 +142,35 @@ sap.ui.define([
 					type: "point",
 					longitude: 138.62232002545724,
 					latitude: -35.0459875724086, 
+					attributes: {
+						id: 1
+					}
 				},
 				{ 
 					type: "point",
 					longitude: 138.608640,
-					latitude: -35.042099
+					latitude: -35.042099,
+					attributes: {
+						id: 2
+					}
 	
 				},
 				{ 
 					type: "point",
 					longitude: 138.60963268949928,
-					latitude: -35.04388314436227
+					latitude: -35.04388314436227,
+					attributes: {
+						id: 3
+					}
 	
 				},
 				{ 
 					type: "point",
 					longitude: 138.6114911884523,
-					latitude: -35.04375019098281
+					latitude: -35.04375019098281,
+					attributes: {
+						id: 4
+					}
 	
 				}
 			];
@@ -174,14 +194,7 @@ sap.ui.define([
 			});
 			this.map.add(graphicsLayer);
 
-			// const point = { //Create a point
-			// 	type: "point",
-			// 	longitude: 138.608640,
-			// 	latitude: -35.042099
-
-			// };
-
-			//[138.608640, -35.042099]
+			
 			let simpleMarkerSymbol = {
 				type: "simple-marker",
 				color: [226, 119, 40],  // Orange
@@ -192,7 +205,7 @@ sap.ui.define([
 			};
 			  simpleMarkerSymbol = {
 				type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
-				url: './images/marker.png',
+				url: './images/marker-white.png',
 				width: "50px",
 				height: "50px"
 			  };
@@ -207,6 +220,12 @@ sap.ui.define([
 					type: 'Order'
 				}
 			});
+
+			if(!this.pointGraphics) {
+				this.pointGraphics = [];
+			}
+			this.pointGraphics.push(pointGraphic);
+
 			graphicsLayer.add(pointGraphic);
 		},
 		/**
