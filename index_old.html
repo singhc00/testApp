@@ -11,6 +11,7 @@
               position: absolute;
               height: 100%;
               width: 100%;
+			  --esri-view-outline-color: transparent;
             }
 		</style>
 		<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
@@ -46,7 +47,9 @@
 		</script>
 	</head>
 
-	<body class="sapUiBody" id="content">
+	<body class="sapUiBody" >
+		<div id="mapPopover"></div>
+		<div id="content" />
 	</body>
 
 </html>

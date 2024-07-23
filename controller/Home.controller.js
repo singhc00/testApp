@@ -118,7 +118,8 @@ sap.ui.define([
 			oGeoMap.setRefMapLayerStack("DEFAULT");
 		},
 		onAfterRendering() {
-			this.initializeMap("arcgis/topographic", 'mapContainer', [138.608640, -35.042099], 15);
+			//arcgis/topographic
+			this.initializeMap("gray", 'mapContainer', [138.608640, -35.042099], 17);
 			//this.initializeMap('streets', 'mapContainer', [-118.818984489994, 34.0137559967283], 15);
 			//[-118.818984489994, 34.0137559967283]
 		},
@@ -231,7 +232,6 @@ sap.ui.define([
 			};
 
 			const markerBase64 = await this.getMarkerBase64("marker-white.png");
-			debugger;
 			simpleMarkerSymbol = {
 				type: "picture-marker",
 				contentType: "image/png",
@@ -315,11 +315,13 @@ sap.ui.define([
 			}
 
 			if(this.jobDetailsDialog.isA("sap.m.ResponsivePopover")) {
-				 this.jobDetailsDialog.setOffsetX(parseInt(offset.offsetX));
-				 this.jobDetailsDialog.setOffsetY(parseInt(offset.offsetY));
+				 this.jobDetailsDialog.setOffsetX(20);
+				 this.jobDetailsDialog.setOffsetY(50);
 			}
 
-			this.jobDetailsDialog.openBy(offset.srcElement);
+			const contentDiv = document.getElementById("mapPopover");
+
+			this.jobDetailsDialog.openBy(contentDiv);
 		},
 		openOrderPopup(content) {
 
