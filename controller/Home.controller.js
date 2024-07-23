@@ -144,7 +144,8 @@ sap.ui.define([
 		},
 		async setPointSelected(graphic) {
 			const clonedGraphic = graphic.clone();
-			clonedGraphic.symbol.set("url", "./images/marker-black.png");
+			const markerBase64 = await this.getMarkerBase64("marker-black.png");
+			clonedGraphic.symbol.set("url", markerBase64);
 			
 			graphic.layer.add(clonedGraphic);
 			graphic.layer.remove(graphic);
@@ -152,7 +153,8 @@ sap.ui.define([
 		},
 		async setPointDeselected() {
 			const clonedGraphic = this.selectedPoint.clone();
-			clonedGraphic.symbol.set("url", "./images/marker-white.png");
+			const markerBase64 = await this.getMarkerBase64("marker-white.png");
+			clonedGraphic.symbol.set("url", markerBase64);
 			this.selectedPoint.layer.add(clonedGraphic);
 			//this.selectedPoint.layer.remove(this.selectedPoint);
 			//this.selectedPoint = null;
@@ -207,7 +209,7 @@ sap.ui.define([
 		 * @param {*} GraphicsLayer 
 		 * @param {*} Graphic 
 		 */
-		addPoint(GraphicsLayer, Graphic, point) {
+		async addPoint(GraphicsLayer, Graphic, point) {
 			if (!this.pointsGraphicsLayer) {
 
 				this.pointsGraphicsLayer = new GraphicsLayer();
@@ -227,14 +229,16 @@ sap.ui.define([
 					width: 1
 				}
 			};
+
+			const markerBase64 = await this.getMarkerBase64("marker-white.png");
+			debugger;
 			simpleMarkerSymbol = {
-				type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
-				url: './images/marker-white.png',
+				type: "picture-marker",
+				contentType: "image/png",
+				url: markerBase64,
 				width: "50px",
 				height: "50px"
 			};
-
-
 
 			const pointGraphic = new Graphic({
 				geometry: point,
@@ -390,6 +394,30 @@ sap.ui.define([
 				view: this.mapView
 			});
 			this.mapView.ui.add(sketch, "bottom-left");
+		},
+		getMarkerBase64(marker) {
+			return new Promise((resolve, reject) => {
+				const path = 'images/' + marker;
+				$.ajax({
+					url: path,
+					beforeSend: function (xhr) {
+						xhr.overrideMimeType('text/plain; charset=x-user-defined');
+					  },
+					success: (result, textStatus, response) => {
+						var responseText = response.responseText;
+						var responseTextLen = responseText.length;
+						let binary = "";
+						for (let i = 0; i < responseTextLen; i++ ) {
+							binary += String.fromCharCode(responseText.charCodeAt(i) & 255)
+						}
+						// 
+						resolve(`data:image/png;base64, ${btoa(binary)}`);
+					},
+					error: reject
+				})
+			})
+			
+			
 		}
 	});
 
