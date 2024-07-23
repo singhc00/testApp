@@ -20,8 +20,8 @@ sap.ui.define([
 				"esri/layers/GraphicsLayer",
 				"esri/geometry/SpatialReference",
 				"esri/geometry/Polygon",
-				 "esri/layers/FeatureLayer",
-				 "esri/widgets/Search"
+				"esri/layers/FeatureLayer",
+				"esri/widgets/Search"
 			],
 				(esriConfig, Map, MapView, Locate, Graphic, GraphicsLayer, SpatialReference, Polygon, FeatureLayer, Search) => {
 					esriConfig.apiKey = "AAPK0844337409204e97adf6606573bb4065LG2XsG7ErJOEo7kuicBPdesFgnbH7g7eDTxIwQQ_sxv2AJeklp_TEoJl4Uzf3BLL";
@@ -40,7 +40,7 @@ sap.ui.define([
 					this.mapView.on('click', (event) => {
 						this.mapViewClicked(event);
 					});
-					
+
 					controller.addFeatureLayer(FeatureLayer);
 
 					const locate = new Locate({
@@ -125,60 +125,74 @@ sap.ui.define([
 					console.log(response);
 					if (response.results && response.results.length > 0) {
 						this.setPointSelected(response.results[0].graphic);
-						this.openActionSheet();
+						this.openActionSheet({
+							offsetX: event.native.offsetX,
+							offsetY: event.native.offsetY, 
+							srcElement: event.native.srcElement
+						});
 
 					}
 				});
 
 		},
 		async setPointSelected(graphic) {
-			graphic.symbol.url = "./images/marker-black.png";
-			debugger;
+			const clonedGraphic = graphic.clone();
+			clonedGraphic.symbol.set("url", "./images/marker-black.png");
 			
+			graphic.layer.add(clonedGraphic);
+			graphic.layer.remove(graphic);
+			this.selectedPoint = clonedGraphic;
+		},
+		async setPointDeselected() {
+			const clonedGraphic = this.selectedPoint.clone();
+			clonedGraphic.symbol.set("url", "./images/marker-white.png");
+			this.selectedPoint.layer.add(clonedGraphic);
+			this.selectedPoint.layer.remove(this.selectedPoint);
+			this.selectedPoint = null;
 		},
 		addPoints(GraphicsLayer, Graphic) {
 			const points = [
 				{
 					type: "point",
 					longitude: 138.62232002545724,
-					latitude: -35.0459875724086, 
+					latitude: -35.0459875724086,
 					attributes: {
 						id: 1
 					}
 				},
-				{ 
+				{
 					type: "point",
 					longitude: 138.608640,
 					latitude: -35.042099,
 					attributes: {
 						id: 2
 					}
-	
+
 				},
-				{ 
+				{
 					type: "point",
 					longitude: 138.60963268949928,
 					latitude: -35.04388314436227,
 					attributes: {
 						id: 3
 					}
-	
+
 				},
-				{ 
+				{
 					type: "point",
 					longitude: 138.6114911884523,
 					latitude: -35.04375019098281,
 					attributes: {
 						id: 4
 					}
-	
+
 				}
 			];
 
-			for(const point of points) {
+			for (const point of points) {
 				this.addPoint(GraphicsLayer, Graphic, point);
 			}
-			
+
 		},
 
 		/**
@@ -187,14 +201,17 @@ sap.ui.define([
 		 * @param {*} Graphic 
 		 */
 		addPoint(GraphicsLayer, Graphic, point) {
+			if (!this.pointsGraphicsLayer) {
 
-			const graphicsLayer = new GraphicsLayer();
-			graphicsLayer.on("click", () => {
-				console.log('Point Clicked');
-			});
-			this.map.add(graphicsLayer);
+				this.pointsGraphicsLayer = new GraphicsLayer();
+				this.pointsGraphicsLayer.on("click", () => {
+					console.log('Point Clicked');
+				});
+				this.map.add(this.pointsGraphicsLayer);
+			}
 
-			
+
+
 			let simpleMarkerSymbol = {
 				type: "simple-marker",
 				color: [226, 119, 40],  // Orange
@@ -203,14 +220,14 @@ sap.ui.define([
 					width: 1
 				}
 			};
-			  simpleMarkerSymbol = {
+			simpleMarkerSymbol = {
 				type: "picture-marker",  // autocasts as new PictureMarkerSymbol()
 				url: './images/marker-white.png',
 				width: "50px",
 				height: "50px"
-			  };
-			  
-			  
+			};
+
+
 
 			const pointGraphic = new Graphic({
 				geometry: point,
@@ -221,12 +238,12 @@ sap.ui.define([
 				}
 			});
 
-			if(!this.pointGraphics) {
+			if (!this.pointGraphics) {
 				this.pointGraphics = [];
 			}
 			this.pointGraphics.push(pointGraphic);
 
-			graphicsLayer.add(pointGraphic);
+			this.pointsGraphicsLayer.add(pointGraphic);
 		},
 		/**
 		 * Adds a feature layer
@@ -235,21 +252,21 @@ sap.ui.define([
 			//Trailheads feature layer (points)
 			const trailsLayer = new FeatureLayer({
 				url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trails/FeatureServer/0"
-			  });
+			});
 
 			this.map.add(trailsLayer, 0);
 		},
 		/**
 		 * Method opens an action sheet for the object type
 		 */
-		async openActionSheet(attributes) {
+		async openActionSheet(offset) {
 			const viewModel = this.getView().getModel("viewModel");
-			
-			if(window.nsWebViewInterface) {
+
+			if (window.nsWebViewInterface) {
 				this.nativeScriptOpenBottomSheet();
 				return;
 			}
-			this.openOrderDialog();
+			this.openOrderDialog(offset);
 			return;
 			if (this.orderInfoPopupContent) {
 				this.openOrderPopup(this.orderInfoPopupContent);
@@ -270,21 +287,31 @@ sap.ui.define([
 
 
 		},
-		async openOrderDialog() {
-			if(!this.jobDetailsDialog) {
+		async openOrderDialog(offset) {
+			if (!this.jobDetailsDialog) {
 				const jobDetailsDialog = await sap.ui.core.Fragment.load({
 					type: "XML",
-					name: "FieldMobility.view.fragments.JobDetailsDialog",
+					name: "FieldMobility.view.fragments.JobDetailsPopover",
 					controller: this
 				});
 				this.jobDetailsDialog = jobDetailsDialog;
+				
 				this.getView().addDependent(this.jobDetailsDialog);
+
+				this.jobDetailsDialog.attachBeforeClose(() => {
+					this.setPointDeselected();
+				});
 			}
 
-			this.jobDetailsDialog.open();
+			if(this.jobDetailsDialog.isA("sap.m.ResponsivePopover")) {
+				 this.jobDetailsDialog.setOffsetX(parseInt(offset.offsetX));
+				 this.jobDetailsDialog.setOffsetY(parseInt(offset.offsetY));
+			}
+
+			this.jobDetailsDialog.openBy(offset.srcElement);
 		},
 		openOrderPopup(content) {
-			
+
 			const originalOnAfterRendering = content.onAfterRendering;
 			const controller = this;
 			content.onAfterRendering = function () {
@@ -305,6 +332,10 @@ sap.ui.define([
 				url: '',
 				hash: 'jobDetails'
 			});
+
+			window.nsWebViewInterface.on('bottomSheetClosed', () => {
+				this.setPointDeselected();
+			});
 		},
 		bottomPopupAfterRendering() {
 			debugger;
@@ -313,7 +344,7 @@ sap.ui.define([
 			var touchstartY = 0;
 			var touchendX = 0;
 			var touchendY = 0;
-			const handleGesure = function() {
+			const handleGesure = function () {
 				var swiped = 'swiped: ';
 				if (touchendX < touchstartX) {
 					console.log(swiped + 'left!');
@@ -342,7 +373,7 @@ sap.ui.define([
 				handleGesure();
 			}, false);
 
-			
+
 		}
 	});
 
