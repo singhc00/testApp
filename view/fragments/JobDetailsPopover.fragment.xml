@@ -1,6 +1,7 @@
 <core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
 
 <ResponsivePopover class="sapUiContentPadding" title="Job Details" placement="Auto" showArrow="false"
+contentHeight="70%"
     >
     <core:Fragment fragmentName="FieldMobility.view.fragments.OrderInfo"
 						type="XML" />

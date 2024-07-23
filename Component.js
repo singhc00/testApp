@@ -28,6 +28,16 @@ sap.ui.define([
 
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
+		},
+		loadArcgis() {
+			return new Promise((resolve, reject) => {
+				const script = document.createElement('script');
+				script.src = 'https://js.arcgis.com/4.30/';
+				script.onload = () => {
+					resolve();
+				}
+				document.head.appendChild(script);
+			});
 		}
 	});
 

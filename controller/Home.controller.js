@@ -1,18 +1,18 @@
 sap.ui.define([
 	"FieldMobility/controller/BaseController",
-	"FieldMobility/util/ArcGis",
 	"sap/ui/core/Popup",
 	"sap/m/Button",
 	"sap/m/VBox",
 	"sap/ui/core/Fragment",
 	"sap/ui/model/json/JSONModel"
-], function (Controller, ArcGis, Popup, Button, VBox, Fragment, JSONModel) {
+], function (Controller, Popup, Button, VBox, Fragment, JSONModel) {
 	"use strict";
 
 	return Controller.extend("FieldMobility.controller.Home", {
-		initializeMap(baseMapName, mapDivId, centerPoint, zoomLevel) {
+		async initializeMap(baseMapName, mapDivId, centerPoint, zoomLevel) {
+			await this.getOwnerComponent().loadArcgis();
 			const controller = this;
-			ArcGis.require(["esri/config",
+			require(["esri/config",
 				"esri/Map",
 				"esri/views/MapView",
 				"esri/widgets/Locate",
@@ -21,9 +21,10 @@ sap.ui.define([
 				"esri/geometry/SpatialReference",
 				"esri/geometry/Polygon",
 				"esri/layers/FeatureLayer",
-				"esri/widgets/Search"
+				"esri/widgets/Search",
+				"esri/widgets/Sketch"
 			],
-				(esriConfig, Map, MapView, Locate, Graphic, GraphicsLayer, SpatialReference, Polygon, FeatureLayer, Search) => {
+				(esriConfig, Map, MapView, Locate, Graphic, GraphicsLayer, SpatialReference, Polygon, FeatureLayer, Search, Sketch) => {
 					esriConfig.apiKey = "AAPK0844337409204e97adf6606573bb4065LG2XsG7ErJOEo7kuicBPdesFgnbH7g7eDTxIwQQ_sxv2AJeklp_TEoJl4Uzf3BLL";
 
 					const map = new Map({
@@ -53,6 +54,8 @@ sap.ui.define([
 					});
 					this.mapView.ui.add(locate, "top-left");
 					controller.addPoints(GraphicsLayer, Graphic);
+					controller.Sketch = Sketch;
+					controller.addSketch();
 					controller.Search = Search;
 
 
@@ -124,6 +127,10 @@ sap.ui.define([
 				.then((response) => {
 					console.log(response);
 					if (response.results && response.results.length > 0) {
+						if(!response.results[0].graphic.symbol) {
+							return;
+						}
+
 						this.setPointSelected(response.results[0].graphic);
 						this.openActionSheet({
 							offsetX: event.native.offsetX,
@@ -147,8 +154,8 @@ sap.ui.define([
 			const clonedGraphic = this.selectedPoint.clone();
 			clonedGraphic.symbol.set("url", "./images/marker-white.png");
 			this.selectedPoint.layer.add(clonedGraphic);
-			this.selectedPoint.layer.remove(this.selectedPoint);
-			this.selectedPoint = null;
+			//this.selectedPoint.layer.remove(this.selectedPoint);
+			//this.selectedPoint = null;
 		},
 		addPoints(GraphicsLayer, Graphic) {
 			const points = [
@@ -374,6 +381,15 @@ sap.ui.define([
 			}, false);
 
 
+		},
+		/**
+		 * Add sketch using esri sketch wizard
+		 */
+		addSketch() {
+			const sketch = new this.Sketch({
+				view: this.mapView
+			});
+			this.mapView.ui.add(sketch, "bottom-left");
 		}
 	});
 
