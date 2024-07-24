@@ -2,7 +2,7 @@
     xmlns:u="sap.ui.unified">
     <VBox alignItems="Center" justifyContent="Center" width="100%">
         <VBox width="100%" class="sapUiMediumMarginTop" alignItems="Center" justifyContent="Center" alignContent="Center">
-            <Text text="{globalModel>/currentOrderInfo/Description} ( Order: {globalModel>/currentOrderInfo/OrderNumber} )" class="jobType" />
+            <Text text="Pole Damaged (Order: 100034567)" class="jobType" />
             <Button text="New" icon="sap-icon://create" class="sapUiMediumMarginTop" width="5rem"></Button>
 
             <HBox class="sapUiTinyMarginTop sapUiMediumMarginBottom">
