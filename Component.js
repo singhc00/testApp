@@ -28,7 +28,9 @@ sap.ui.define([
 
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
+			this.setModel(models.createGlobalModel(), "globalModel");
 		},
+		
 		loadArcgis() {
 			return new Promise((resolve, reject) => {
 				const script = document.createElement('script');

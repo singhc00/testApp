@@ -133,6 +133,7 @@ sap.ui.define([
 						}
 
 						this.setPointSelected(response.results[0].graphic);
+						this.setCurrentOrderInfo(response.results[0].graphic.attributes);
 						this.openActionSheet({
 							offsetX: event.native.offsetX,
 							offsetY: event.native.offsetY, 
@@ -143,6 +144,18 @@ sap.ui.define([
 				});
 
 		},
+		/**
+		 * Sets the clicked order info to the global model
+		 */
+		setCurrentOrderInfo(attributes) {
+			if(!attributes || !attributes.OrderNumber) {
+				return;
+			}
+
+			const globalModel = this.getView().getModel("globalModel");
+			globalModel.setProperty("/currentOrderInfo", attributes);
+		},
+
 		async setPointSelected(graphic) {
 			const clonedGraphic = graphic.clone();
 			const markerBase64 = await this.getMarkerBase64("marker-black.png");
@@ -167,7 +180,8 @@ sap.ui.define([
 					longitude: 138.62232002545724,
 					latitude: -35.0459875724086,
 					attributes: {
-						id: 1
+						OrderNumber: "10032564",
+						Description: "Stobie Pole down"
 					}
 				},
 				{
@@ -175,7 +189,8 @@ sap.ui.define([
 					longitude: 138.608640,
 					latitude: -35.042099,
 					attributes: {
-						id: 2
+						OrderNumber: "100345111",
+						Description: "Transformer damaged"
 					}
 
 				},
@@ -184,7 +199,8 @@ sap.ui.define([
 					longitude: 138.60963268949928,
 					latitude: -35.04388314436227,
 					attributes: {
-						id: 3
+						OrderNumber: "100385214",
+						Description: "Powerline damaged"
 					}
 
 				},
@@ -193,7 +209,8 @@ sap.ui.define([
 					longitude: 138.6114911884523,
 					latitude: -35.04375019098281,
 					attributes: {
-						id: 4
+						OrderNumber: "100352144",
+						Description: "Electric Shock"
 					}
 
 				}
@@ -243,10 +260,7 @@ sap.ui.define([
 			const pointGraphic = new Graphic({
 				geometry: point,
 				symbol: simpleMarkerSymbol,
-				attributes: {
-					OrderNumber: '100032569',
-					type: 'Order'
-				}
+				attributes: point.attributes
 			});
 
 			if (!this.pointGraphics) {
