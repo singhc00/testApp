@@ -1,7 +1,7 @@
 <mvc:View controllerName="FieldMobility.controller.Home" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:vk="sap.ui.vk" xmlns:vbm="sap.ui.vbm">
 
-			<Page showHeader="false" busy="{viewModel>/pageBusy}" busyIndicatorDelay="0">
+			<Page showHeader="false" busy="{viewModel>/pageBusy}" busyIndicatorDelay="1000">
 				<content>
 					<!-- <core:HTML content="&lt;div id='esri-map-div' height='800px' &gt;"> -->
 					<core:HTML content="&lt;div id=&quot;mapContainer&quot;&gt; &lt;/div&gt;">
