@@ -22,7 +22,7 @@ sap.ui.define(
 
         this.addTokenInterceptor(token);
 
-        this.addOrdersLayerToMap();
+        //this.addOrdersLayerToMap();
 
         this.mapView = new component.arcgis.MapView({
           map: this.map,
