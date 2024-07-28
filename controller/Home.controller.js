@@ -13,8 +13,7 @@ sap.ui.define(
 
     return Controller.extend("FieldMobility.controller.Home", {
       async initializeMap(baseMapName, mapDivId, centerPoint, zoomLevel) {
-        //const token = await this.getArcgisToken();
-        const token = '';
+        const token = await this.getArcgisToken();
         const component = this.getOwnerComponent();
         this.map = new component.arcgis.Map({
           basemap: baseMapName,
@@ -22,7 +21,7 @@ sap.ui.define(
 
         this.addTokenInterceptor(token);
 
-        //this.addOrdersLayerToMap();
+        this.addOrdersLayerToMap();
 
         this.mapView = new component.arcgis.MapView({
           map: this.map,
@@ -84,12 +83,7 @@ sap.ui.define(
         //this.setEsriMapConfiguration();
 
         this.intializeViewModel();
-        await this.initializeMap(
-          "gray",
-          "mapContainer",
-          [138.60864, -35.042099],
-          17
-        );
+       
       },
       intializeViewModel() {
         let viewModel = this.getView().getModel("viewModel");
@@ -147,6 +141,12 @@ sap.ui.define(
         oGeoMap.setRefMapLayerStack("DEFAULT");
       },
       onAfterRendering() {
+        this.initializeMap(
+          "gray",
+          "mapContainer",
+          [138.6426785237267, -34.931300004484065],
+          17
+        ).then(() => {});
         //arcgis/topographic
         //this.initializeMap("gray", "mapContainer", [138.60864, -35.042099], 17);
         //this.initializeMap('streets', 'mapContainer', [-118.818984489994, 34.0137559967283], 15);
