@@ -11,9 +11,17 @@
               position: absolute;
               height: 100%;
               width: 100%;
+			  --esri-view-outline-color: transparent;
             }
 		</style>
 		<link rel="stylesheet" href="https://js.arcgis.com/4.30/esri/themes/light/main.css">
+		<script>
+			// require(["esri/config", "esri/Map"], (esriConfig, Map) => {
+			// 	esriConfig.apiKey = "AAPK0844337409204e97adf6606573bb4065LG2XsG7ErJOEo7kuicBPdesFgnbH7g7eDTxIwQQ_sxv2AJeklp_TEoJl4Uzf3BLL";
+			// });
+			
+
+		</script>
 		<!-- src="../resources/sap-ui-core.js" -->
 		<script id="sap-ui-bootstrap"
 			
@@ -28,22 +36,19 @@
 
 		<script>
 			sap.ui.getCore().attachInit(function() {
-				// new sap.m.Shell({
-				// 	app: new sap.ui.core.ComponentContainer({
-				// 		height : "100%",
-				// 		name : "FieldMobility"
-				// 	})
-				// }).placeAt("content");
-				new sap.ui.core.ComponentContainer({
+				new sap.m.Shell({
+					app: new sap.ui.core.ComponentContainer({
 						height : "100%",
 						name : "FieldMobility"
-					}).placeAt("content");
+					}),
+					appWidthLimited: false
+				}).placeAt("content");
 			});
 		</script>
 	</head>
 
 	<body class="sapUiBody" >
-		<div id="mapPopover" />
+		<div id="mapPopover"></div>
 		<div id="content" />
 	</body>
 
