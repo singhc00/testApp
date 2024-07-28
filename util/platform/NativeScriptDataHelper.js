@@ -7,12 +7,16 @@ sap.ui.define([
             const requestOptions = options;
             const uniqueId = crypto.randomUUID();
             requestOptions.uniqueId = uniqueId;
-            window.nsWebViewInterface.on('restService', (responseOptions) => {
-              if(responseOptions.uniqueId === uniqueId) {
-                //alert(JSON.stringify(responseOptions));
-                  resolve(JSON.parse(responseOptions.response.data), responseOptions.response.headers);
-              }
-            }); 
+            if(!window.nsFieldMobilityRestServiceEventRegistered) {
+              window.nsWebViewInterface.on('restService', (responseOptions) => {
+                if(responseOptions.uniqueId === uniqueId) {
+                  //alert(JSON.stringify(responseOptions));
+                    resolve(JSON.parse(responseOptions.response.data), responseOptions.response.headers);
+                }
+              }); 
+              window.nsFieldMobilityRestServiceEventRegistered = true;
+            }
+            
             
             window.nsWebViewInterface.emit('restService', requestOptions);
             
