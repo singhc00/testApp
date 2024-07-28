@@ -13,7 +13,8 @@ sap.ui.define(
 
     return Controller.extend("FieldMobility.controller.Home", {
       async initializeMap(baseMapName, mapDivId, centerPoint, zoomLevel) {
-        const token = await this.getArcgisToken();
+        //const token = await this.getArcgisToken();
+        const token = '';
         const component = this.getOwnerComponent();
         this.map = new component.arcgis.Map({
           basemap: baseMapName,
@@ -33,7 +34,9 @@ sap.ui.define(
           //   },
         });
 
-        this.mapView.on("click", (event) => {
+        this.mapView.on("click", async (event) => {
+          debugger;
+          await this.getArcGisCred();
           this.mapViewClicked(event);
         });
 
