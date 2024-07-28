@@ -10,7 +10,7 @@ sap.ui.define([
             window.nsWebViewInterface.emit('restService', requestOptions);
             window.nsWebViewInterface.on('restService', (responseOptions) => {
                 if(responseOptions.uniqueId === uniqueId) {
-                    resolve();
+                    resolve(responseOptions);
                 }
             }); 
         });
