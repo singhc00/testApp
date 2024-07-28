@@ -26,7 +26,7 @@ sap.ui.define(
 
           this.addOrdersLayerToMap();
         } catch(e) {
-          MessageBox.error("There was error adding the orders layer. " + e.message ? e.message : "");
+          MessageBox.error("There was error adding the orders layer. " + ( e.message ? e.message : ""));
         }
         
 
