@@ -9,6 +9,7 @@ sap.ui.define([
             requestOptions.uniqueId = uniqueId;
             window.nsWebViewInterface.emit('restService', requestOptions);
             window.nsWebViewInterface.on('restService', (responseOptions) => {
+                alert(responseOptions);
                 if(responseOptions.uniqueId === uniqueId) {
                     resolve(responseOptions);
                 }
