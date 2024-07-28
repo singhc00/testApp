@@ -6,22 +6,29 @@ sap.ui.define(
     "sap/m/VBox",
     "sap/ui/core/Fragment",
     "sap/ui/model/json/JSONModel",
-    "FieldMobility/util/DataHandler"
+    "FieldMobility/util/DataHandler",
+    "sap/m/MessageBox"
   ],
-  function (Controller, Popup, Button, VBox, Fragment, JSONModel, DataHandler) {
+  function (Controller, Popup, Button, VBox, Fragment, JSONModel, DataHandler, MessageBox) {
     "use strict";
 
     return Controller.extend("FieldMobility.controller.Home", {
       async initializeMap(baseMapName, mapDivId, centerPoint, zoomLevel) {
-        const token = await this.getArcgisToken();
+        
         const component = this.getOwnerComponent();
         this.map = new component.arcgis.Map({
           basemap: baseMapName,
         });
 
-        this.addTokenInterceptor(token);
+        try {
+          const token = await this.getArcgisToken();
+          this.addTokenInterceptor(token);
 
-        this.addOrdersLayerToMap();
+          this.addOrdersLayerToMap();
+        } catch(e) {
+          MessageBox.error("There was error adding the orders layer. " + e.message ? e.message : "");
+        }
+        
 
         this.mapView = new component.arcgis.MapView({
           map: this.map,
