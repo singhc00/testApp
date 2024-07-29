@@ -244,7 +244,17 @@ sap.ui.define(
               Description: "Electric Shock",
             },
           },
+          {
+            type: "point",
+            longitude: 138.6426785237267,
+            latitude: -34.931300004484065,
+            attributes: {
+              OrderNumber: "100352144",
+              Description: "Electric Shock",
+            },
+          },
         ];
+
 
         for (const point of points) {
           this.addPoint(point);
