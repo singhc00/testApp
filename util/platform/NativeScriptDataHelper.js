@@ -7,7 +7,7 @@ sap.ui.define([
             const requestOptions = options;
             const uniqueId = crypto.randomUUID();
             requestOptions.uniqueId = uniqueId;
-            if(!window.nsFieldMobilityRestServiceEventRegistered) {
+            //if(!window.nsFieldMobilityRestServiceEventRegistered) {
               window.nsWebViewInterface.on('restService', (responseOptions) => {
                 if(responseOptions.uniqueId === uniqueId) {
                   //alert(JSON.stringify(responseOptions));
@@ -15,7 +15,7 @@ sap.ui.define([
                 }
               }); 
               window.nsFieldMobilityRestServiceEventRegistered = true;
-            }
+            //}
             
             
             window.nsWebViewInterface.emit('restService', requestOptions);
