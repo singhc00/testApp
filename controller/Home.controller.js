@@ -55,7 +55,7 @@ sap.ui.define(
             return view.goTo(options.target);
           },
         });
-        this.mapView.ui.add(locate, "top-left");
+        this.mapView.ui.add(locate, "bottom-right");
         this.addPoints();
         this.addSketch();
       },
